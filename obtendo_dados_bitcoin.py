@@ -15,11 +15,11 @@ DB_BASE = os.getenv('DB_BASE')
 DB_USER = os.getenv('DB_USER')
 DB_PASSWORD = os.getenv('DB_PASSWORD')
 DB_HOST = os.getenv('DB_HOST')
+API_URL = os.getenv('API_URL')
 
 
 
 DATABASE_URL = f"postgresql+psycopg2://{DB_USER}:{DB_PASSWORD}@{DB_HOST}/{DB_BASE}"
-
 
 engine = create_engine(DATABASE_URL)
 Session = sessionmaker(bind=engine)
@@ -35,7 +35,7 @@ class BitcoinDados(Base):
     timestamp = Column(DateTime)
 
 def extrair():
-    url = "https://api.coinbase.com/v2/prices/spot"
+    url = API_URL
     response = requests.get(url)
     return response.json()
 
